@@ -1,0 +1,50 @@
+{
+  "namespace": "com.google.cloud.solutions.beamavro.beans",
+  "type": "record",
+  "name": "OrderDetails",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "timestamp",
+      "type" : {
+        "type" : "long",
+        "logicalType" : "timestamp-millis"
+      }
+    },
+    {
+      "name": "dt",
+      "type" : {
+        "type": "int",
+        "logicalType" : "date"
+      }
+    },
+    {
+      "name": "items",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "OrderItem",
+          "namespace": "com.google.cloud.solutions.beamavro.beans",
+          "type": "record",
+          "fields": [
+            {
+              "name": "id",
+              "type": "long"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "price",
+              "type": "float"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
