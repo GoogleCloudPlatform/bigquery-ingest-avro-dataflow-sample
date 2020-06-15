@@ -40,7 +40,7 @@ To run the example:
         ```
    2. Install python dependencies
         ```shell script
-        pip install -r generator/requirement.txt
+        pip install -r generator/requirements.txt
         ```
    3. Run the Generator
         ```shell script
