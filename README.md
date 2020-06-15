@@ -28,6 +28,6 @@ To run the example:
     --outputPath=$AVRO_OUT"
     ```
 4. Run event generation script: 
-```shell script
-python3 generator/gen.py -p $GOOGLE_CLOUD_PROJECT -t $MY_TOPIC -n 100 -f avro
-```
+    ```shell script
+    python3 generator/gen.py -p $GOOGLE_CLOUD_PROJECT -t $MY_TOPIC -n 100 -f avro
+    ```
