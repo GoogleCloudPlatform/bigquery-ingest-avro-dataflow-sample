@@ -8,7 +8,42 @@ Contents of this repository:
 * `generator`: Python code for the randomized event generator.
 
 To run the example:
-* Set environment variables using env.sh
-* Generate java beans from the avro file: `mvn generate-sources`
-* Run Dataflow pipeline: mvn compile exec:java -Dexec.mainClass=com.google.cloud.solutions.beamavro.AvroToBigQuery -Dexec.cleanupDaemonThreads=false   -Dexec.args="--project=$GOOGLE_CLOUD_PROJECT --runner=DataflowRunner --stagingLocation=gs://$MY_BUCKET/stage/ --tempLocation=gs://$MY_BUCKET/temp/ --inputPath=projects/$GOOGLE_CLOUD_PROJECT/topics/$MY_TOPIC --workerMachineType=n1-standard-1 --maxNumWorkers=$NUM_WORKERS --region=$REGION --dataset=$BQ_DATASET --bqTable=$BQ_TABLE --outputPath=$AVRO_OUT"
-* Run event generation script: python3 generator/gen.py -p $GOOGLE_CLOUD_PROJECT -t $MY_TOPIC -n 100 -f avro
+1. Update configuration by updating [env.sh](env.sh)
+2. Set environment variables
+    ```shell script
+    source env.sh
+    ```
+3. Generate java beans from the avro file and Run Dataflow pipeline: 
+    ```shell script
+    mvn clean generate-sources compile exec:java \
+      -Dexec.mainClass=com.google.cloud.solutions.beamavro.AvroToBigQuery \
+      -Dexec.cleanupDaemonThreads=false \
+      -Dexec.args=" \
+    --project=$GOOGLE_CLOUD_PROJECT \
+    --runner=DataflowRunner \
+    --stagingLocation=gs://$MY_BUCKET/stage/ \
+    --tempLocation=gs://$MY_BUCKET/temp/ \
+    --inputPath=projects/$GOOGLE_CLOUD_PROJECT/topics/$MY_TOPIC \
+    --workerMachineType=n1-standard-1 \
+    --maxNumWorkers=$NUM_WORKERS \
+    --region=$REGION \
+    --dataset=$BQ_DATASET \
+    --bqTable=$BQ_TABLE \
+    --outputPath=$AVRO_OUT" \
+    --file BeamAvro/pom.xml
+    ```
+4. Run event generation script:
+   1. Create Python virtual environment
+        ```shell script
+        python3 -m venv ~/generator-venv
+        source ~/generator-venv/bin/activate
+        ```
+   2. Install python dependencies
+        ```shell script
+        pip install -r generator/requirement.txt
+        ```
+   3. Run the Generator
+        ```shell script
+        python generator/gen.py -p $GOOGLE_CLOUD_PROJECT -t $MY_TOPIC -n 100 -f avro
+        ```
+      
