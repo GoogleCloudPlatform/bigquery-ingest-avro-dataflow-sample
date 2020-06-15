@@ -8,10 +8,14 @@ Contents of this repository:
 * `generator`: Python code for the randomized event generator.
 
 To run the example:
-1. Set environment variables using env.sh
-2. Generate java beans from the avro file and Run Dataflow pipeline: 
+1. Update configuration by updating [env.sh](env.sh)
+2. Set environment variables
     ```shell script
-    mvn generate-sources compile exec:java \
+    source env.sh
+    ```
+3. Generate java beans from the avro file and Run Dataflow pipeline: 
+    ```shell script
+    mvn clean generate-sources compile exec:java \
       -Dexec.mainClass=com.google.cloud.solutions.beamavro.AvroToBigQuery \
       -Dexec.cleanupDaemonThreads=false \
       -Dexec.args=" \
@@ -25,9 +29,10 @@ To run the example:
     --region=$REGION \
     --dataset=$BQ_DATASET \
     --bqTable=$BQ_TABLE \
-    --outputPath=$AVRO_OUT"
+    --outputPath=$AVRO_OUT" \
+    --file BeamAvro/pom.xml
     ```
 4. Run event generation script: 
-    ```shell script
+    ```shell script    
     python3 generator/gen.py -p $GOOGLE_CLOUD_PROJECT -t $MY_TOPIC -n 100 -f avro
     ```
