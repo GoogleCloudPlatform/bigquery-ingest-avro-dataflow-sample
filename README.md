@@ -32,7 +32,18 @@ To run the example:
     --outputPath=$AVRO_OUT" \
     --file BeamAvro/pom.xml
     ```
-4. Run event generation script: 
-    ```shell script    
-    python3 generator/gen.py -p $GOOGLE_CLOUD_PROJECT -t $MY_TOPIC -n 100 -f avro
-    ```
+4. Run event generation script:
+   1. Create Python virtual environment
+        ```shell script
+        python3 -m venv ~/generator-venv
+        source ~/generator-venv/bin/activate
+        ```
+   2. Install python dependencies
+        ```shell script
+        pip install -r generator/requirement.txt
+        ```
+   3. Run the Generator
+        ```shell script
+        python generator/gen.py -p $GOOGLE_CLOUD_PROJECT -t $MY_TOPIC -n 100 -f avro
+        ```
+      
