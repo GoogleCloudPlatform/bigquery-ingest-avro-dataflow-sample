@@ -42,10 +42,7 @@ logging.basicConfig(level=logging.DEBUG)
 """
 class AvroConvertor(object):
   def __init__(self):
-    self.schema = avro.schema.Parse(
-        open(
-            "../BeamAvro/src/main/resources/orderdetails.avsc"
-            , "rb").read())
+    self.schema = avro.schema.Parse(open("../orderdetails.avsc", "rb").read())
 
   def convert(self, obj_map):
     writer = avro.io.DatumWriter(self.schema)

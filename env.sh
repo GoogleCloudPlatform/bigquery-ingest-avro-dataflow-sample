@@ -30,6 +30,3 @@ export BQ_REGION="US"
 export BQ_DATASET="sales"
 # BigQuery table name
 export BQ_TABLE="orders"
-# Maximum number of Dataflow workers
-export NUM_WORKERS=1
-
