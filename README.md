@@ -32,7 +32,7 @@ To run the example:
    --dataset=$BQ_DATASET \
    --bqTable=$BQ_TABLE \
    --outputPath=$AVRO_OUT \   
-   --avroSchema="$(<src/main/resources/orderdetails.avsc)"
+   --avroSchema="$(<../orderdetails.avsc)"
    ```
 4. Run event generation script:
    1. Create Python virtual environment
