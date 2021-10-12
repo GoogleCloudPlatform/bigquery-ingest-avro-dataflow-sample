@@ -15,23 +15,25 @@ To run the example:
     ```
 3. Generate java beans from the avro file and Run Dataflow pipeline: 
     ```shell script
-    mvn clean generate-sources compile exec:java \
-      -Dexec.mainClass=com.google.cloud.solutions.beamavro.AvroToBigQuery \
-      -Dexec.cleanupDaemonThreads=false \
-      -Dexec.args=" \
-    --project=$GOOGLE_CLOUD_PROJECT \
-    --runner=DataflowRunner \
-    --stagingLocation=gs://$MY_BUCKET/stage/ \
-    --tempLocation=gs://$MY_BUCKET/temp/ \
-    --inputPath=projects/$GOOGLE_CLOUD_PROJECT/topics/$MY_TOPIC \
-    --workerMachineType=n1-standard-1 \
-    --maxNumWorkers=$NUM_WORKERS \
-    --region=$REGION \
-    --dataset=$BQ_DATASET \
-    --bqTable=$BQ_TABLE \
-    --outputPath=$AVRO_OUT" \
-    --file BeamAvro/pom.xml
-    ```
+    mvn clean compile package   
+   ```
+
+   Run the pipeline
+   ```shell
+   java -cp target/BeamAvro-bundled-1.0-SNAPSHOT.jar \
+   com.google.cloud.solutions.beamavro.AvroToBigQuery \
+   --project=$GOOGLE_CLOUD_PROJECT \
+   --runner=DataflowRunner \
+   --stagingLocation=gs://$MY_BUCKET/stage/ \
+   --tempLocation=gs://$MY_BUCKET/temp/ \
+   --inputPath=projects/$GOOGLE_CLOUD_PROJECT/topics/$MY_TOPIC \
+   --workerMachineType=n1-standard-1 \
+   --region=$REGION \
+   --dataset=$BQ_DATASET \
+   --bqTable=$BQ_TABLE \
+   --outputPath=$AVRO_OUT \   
+   --avroSchema="$(<src/main/resources/orderdetails.avsc)"
+   ```
 4. Run event generation script:
    1. Create Python virtual environment
         ```shell script
