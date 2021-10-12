@@ -108,7 +108,7 @@ public class AvroToBigQuery {
   public static void main(String[] args) {
     PipelineOptionsFactory.register(AvroToBigQueryOptions.class);
 
-    new AvroToBigQuery(args, null).buildPipeline().run().waitUntilFinish();
+    new AvroToBigQuery(args, null).buildPipeline().run();
   }
 
   @VisibleForTesting
